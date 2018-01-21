@@ -1,0 +1,45 @@
+﻿<Window x:Class="ContractorMgrt.Wpf.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:ContractorMgrt.Wpf.Views"
+        xmlns:viewModel="clr-namespace:ContractorMgrt.Wpf.ViewModels"
+        xmlns:cal="http://www.caliburnproject.org"
+        Title="Contractor Management" WindowState="Maximized"  WindowStyle="ToolWindow"
+        mc:Ignorable="d" 
+        FontSize="20">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded" >
+            <cal:ActionMessage MethodName="OnLoaded" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:FriendDetailViewModel}">
+            <local:FriendDetailView/>
+        </DataTemplate>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File" FontSize="20">
+                <MenuItem Header="_New Contract" InputGestureText="Ctrl+C" />
+                <Separator />
+                <MenuItem Header="_Exit" InputGestureText="Ctrl+X" />
+            </MenuItem>
+        </Menu>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <local:NavigationView Grid.Row="1" Grid.Column="0"
+                         DataContext="{Binding NavigationViewModel}"/>
+            <ContentControl Name="SelectedDetailViewModel" Margin="10" Grid.Row="1" Grid.Column="1"/>
+
+        </Grid>
+    </DockPanel>
+</Window>

@@ -3,3 +3,18 @@
 ################################################################################
 
 /.vs/ContractorMgrt/v15/Server/sqlite3
+/src/ContractorMgrt.Business/bin/Debug
+/src/ContractorMgrt.Business/obj/Debug
+/src/ContractorMgrt.Data/bin/Debug
+/src/ContractorMgrt.Data/obj/Debug
+/src/ContractorMgrt.Models/bin/Debug
+/src/ContractorMgrt.Models/obj/Debug
+/src/ContractorMgrt.Wpf/bin/Debug
+/src/ContractorMgrt.Wpf/obj/Debug
+/src/ContractorMgrt.Wpf/ContractorMgrt.UI.csproj.user
+/src/Shared/Data.Dapper/bin/Debug
+/src/Shared/Data.Dapper/obj/Debug
+/src/Shared/Infrastructure/bin/Debug
+/src/Shared/Infrastructure/obj/Debug
+/src/Shared/Infrastructure/Infrastructure.csproj.user
+/.vs/ContractorMgrt/v15
