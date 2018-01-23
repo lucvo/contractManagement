@@ -5,3 +5,5 @@ This simple wpf application demo for my common library
 - CQRS
 - MVVM (WPF, Caliburn.Micro)
 - Autofac
+
+https://caliburnmicro.codeplex.com/wikipage?title=Screens,%20Conductors%20and%20Composition
