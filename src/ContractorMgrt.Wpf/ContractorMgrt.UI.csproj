@@ -82,10 +82,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AutofacBootstrapper.cs" />
+    <Compile Include="Events\AfterCollectionSavedEventArgs.cs" />
+    <Compile Include="Events\AfterDetailClosedEventArgs.cs" />
+    <Compile Include="Events\AfterDetailDeletedEventArgs.cs" />
+    <Compile Include="Events\AfterDetailSavedEventArgs.cs" />
     <Compile Include="Events\OpenDetailViewEvent.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="Modules\DataAccessModule.cs" />
     <Compile Include="Modules\DataServiceModule.cs" />
+    <Compile Include="ViewModels\DetailViewModelBase.cs" />
     <Compile Include="ViewModels\FriendDetailViewModel.cs" />
     <Compile Include="ViewModels\Contracts\IDetailViewModel.cs" />
     <Compile Include="ViewModels\Contracts\INavigationViewModel.cs" />
@@ -110,6 +115,8 @@
     <Compile Include="Views\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Services\IMessageDialogService.cs" />
+    <Compile Include="Views\Services\MessageDialogService.cs" />
     <Page Include="Views\FriendDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -23,7 +23,7 @@ namespace ContractorMgrt.Wpf.ViewModels
             this.eventAggregator = eventAggregator;
             Friends = new BindableCollection<NavigationItemViewModel>();
         }
-        public void Loaded()
+        public void Load()
         {
             var lookup = friendLookupService.GetFriendLookupAsync();
             Friends.Clear();

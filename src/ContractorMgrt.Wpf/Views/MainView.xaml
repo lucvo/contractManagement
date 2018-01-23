@@ -25,7 +25,7 @@
             <MenuItem Header="_File" FontSize="20">
                 <MenuItem Header="_New Contract" InputGestureText="Ctrl+C" />
                 <Separator />
-                <MenuItem Header="_Exit" InputGestureText="Ctrl+X" />
+                <MenuItem Header="_Exit" InputGestureText="Ctrl+X" cal:Message.Attach="Exit" />
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Bottom">
@@ -38,7 +38,30 @@
             </Grid.ColumnDefinitions>
             <local:NavigationView Grid.Row="1" Grid.Column="0"
                          DataContext="{Binding NavigationViewModel}"/>
-            <ContentControl Name="SelectedDetailViewModel" Margin="10" Grid.Row="1" Grid.Column="1"/>
+
+            <TabControl Grid.Row="1" Grid.Column="1" 
+                ItemsSource="{Binding DetailViewModels}"
+                SelectedItem="{Binding SelectedDetailViewModel,Mode=TwoWay}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Title}"/>
+                            <TextBlock Text="*" Visibility="{Binding HasChanges,
+              Converter={StaticResource booleanToVisibilityConverter}}"/>
+                            <Button Command="{Binding CloseDetailViewCommand}" 
+                    VerticalContentAlignment="Top" Margin="2"
+                    Content="x" FontSize="20"/>
+                        </StackPanel>
+                    </DataTemplate>
+                    
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding .}"/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+            <!--https://stackoverflow.com/questions/20883868/wpf-caliburn-micro-and-tabcontrol-with-usercontrols-issue-->
 
         </Grid>
     </DockPanel>

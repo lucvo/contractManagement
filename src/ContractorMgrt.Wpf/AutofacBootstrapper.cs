@@ -2,6 +2,7 @@
 using Caliburn.Micro;
 using Caliburn.Micro.Autofac;
 using ContractorMgrt.Wpf.ViewModels;
+using ContractorMgrt.Wpf.Views.Services;
 using System.Windows;
 namespace ContractorMgrt.Wpf
 {
@@ -24,7 +25,9 @@ namespace ContractorMgrt.Wpf
             builder
                 .RegisterType<FriendDetailViewModel>()
                 .Keyed<IDetailViewModel>(nameof(FriendDetailViewModel));
-
+            builder
+                .RegisterType<MessageDialogService>()
+                .As<IMessageDialogService>();
             builder.RegisterInstance(container);
         }
 

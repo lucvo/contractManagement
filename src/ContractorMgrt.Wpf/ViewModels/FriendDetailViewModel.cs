@@ -9,8 +9,12 @@ namespace ContractorMgrt.Wpf.ViewModels
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    public class FriendDetailViewModel : 
-        Screen, 
+    using ContractorMgrt.Wpf.Views.Services;
+    using ContractorMgrt.Models;
+    using System.Windows.Input;
+
+    public class FriendDetailViewModel :
+        DetailViewModelBase,
         IDetailViewModel
     {
         IFriendRepository friendRepository;
@@ -19,11 +23,10 @@ namespace ContractorMgrt.Wpf.ViewModels
         string email;
         string lastName;
 
-        public FriendDetailViewModel(IFriendRepository friendRepository)
+        public FriendDetailViewModel(IEventAggregator eventAggregator, IMessageDialogService messageDialogService, IFriendRepository friendRepository) : base(eventAggregator, messageDialogService)
         {
             this.friendRepository = friendRepository;
         }
-        public int Id { get; private set; }
 
         public string FirstName
         {
@@ -49,16 +52,54 @@ namespace ContractorMgrt.Wpf.ViewModels
                 Set(ref email, value);
             }
         }
-        public void Load(int id)
+
+        public override bool CanExecuteChanged { get { return true; } }
+
+        public override Task LoadAsync(int id)
         {
+            throw new NotImplementedException();
+        }
+        public override void Load(int id) { 
+            var friend = id > 0 
+                ? friendRepository.GetById(id) 
+                : CreateNewFriend();
+
             Id = id;
-            var friend = friendRepository.GetById(id);
-            if(friend != null)
+            if (friend != null)
             {
                 FirstName = friend.FirstName;
                 LastName = friend.LastName;
                 Email = friend.Email;
             }
+            SetTitle();
+            MessageDialogService.ShowInfoDialog($"{id}");
+        }
+        private void SetTitle()
+        {
+            Title = $"{FirstName} {LastName}";
+        }
+        private FriendPhoneNumber _selectedPhoneNumber;
+
+        public FriendPhoneNumber SelectedPhoneNumber
+        {
+            get { return _selectedPhoneNumber; }
+            set
+            {
+                Set(ref _selectedPhoneNumber, value);
+                NotifyOfPropertyChange(() => CanExecuteChanged);
+            }
+        }
+
+        public ICommand AddPhoneNumberCommand { get; }
+
+        public ICommand RemovePhoneNumberCommand { get; }
+
+
+        public BindableCollection<FriendPhoneNumber> PhoneNumbers { get; }
+        private Friend CreateNewFriend()
+        {
+            var friend = new Friend();
+            return friend;
         }
     }
 }
